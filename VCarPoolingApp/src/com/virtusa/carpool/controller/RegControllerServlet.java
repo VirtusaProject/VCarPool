@@ -50,24 +50,25 @@ public class RegControllerServlet extends HttpServlet {
 		user.setType(request.getParameter("type"));
 		RequestDispatcher dispatcher = null;
 		log.info(user);
-		int key = 0;
+		Integer key = 0;
 		
 		try {
-				if ((key = usr.insert(user)) > 0) {
-					if (user.getType().equals("provider")) {
-						// System.out.println("provider block");
-						response.addCookie(new Cookie("username", user.getUserName()));
-						dispatcher = request.getRequestDispatcher("/JSP/addCar.jsp");
-					} else {
-						HttpSession session = request.getSession();
-						session.setAttribute("userid", key);
-						dispatcher = request.getRequestDispatcher("/JSP/regSucess.jsp");
-					}
-				} else
-					request.setAttribute("message", "failed to register, you may have alredy registered");
-					dispatcher = request.getRequestDispatcher("/JSP/register.jsp");
-
+			key= usr.insert(user); /* key is the userId*/
+			String userid=key.toString();
+			if(key>0) {
+				if(user.getType().equals("provider")) {
+					HttpSession session = request.getSession();
+					session.setAttribute("userid", userid );
+					session.setAttribute("username", user.getUserName() );
+					dispatcher= request.getRequestDispatcher("/JSP/addCar.jsp");
+				}
+				else {
+					HttpSession session= request.getSession();
+					session.setAttribute("userid", userid);
+					dispatcher= request.getRequestDispatcher("/JSP/regSucess.jsp");
+				}
 			}
+		}
 
 		catch (VCarPoolException e) {
 			// TODO Auto-generated catch block

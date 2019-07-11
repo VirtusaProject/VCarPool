@@ -45,9 +45,12 @@ public class User {
 		this.type = type;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password +"]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", type=" + type
+				+ ", email=" + email + "]";
 	}
 
 	public User(String userName, String password, String type) {
