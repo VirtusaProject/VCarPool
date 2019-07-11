@@ -49,6 +49,15 @@ public class Car {
 		this.seatsAvailable = seatsAvailable;
 	}
 	
+	public Car(String regNo, String carName, int seatsAvailable, String source, String destination, String deptTime) {
+		super();
+		this.regNo = regNo;
+		this.carName = carName;
+		this.seatsAvailable = seatsAvailable;
+		this.source = source;
+		this.destination = destination;
+		this.deptTime = deptTime;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

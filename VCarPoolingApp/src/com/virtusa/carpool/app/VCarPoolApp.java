@@ -7,8 +7,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.virtusa.carpool.exception.VCarPoolException;
+import com.virtusa.carpool.model.Car;
 import com.virtusa.carpool.model.Ride;
 import com.virtusa.carpool.model.User;
+import com.virtusa.carpool.services.ServiceCar;
 import com.virtusa.carpool.services.ServiceRide;
 import com.virtusa.carpool.services.ServiceUser;
 
@@ -22,31 +24,18 @@ public class VCarPoolApp {
 
 	public static void main(String[] args) throws VCarPoolException {
 		ServiceUser s = new ServiceUser();
-		User user = new User("krishna", "password", "provider");
-
-		user.setEmail("eppppS@gmail.com");
-		int id = s.insert(user);
-		user.setUserId(id);
+		ServiceCar c= new ServiceCar();
 		/*
-		 * int id=s.insert(user); user.setUserId(id);
+		 * User user = new User("krishna", "password", "provider");
+		 * 
+		 * user.setEmail("enew2o@gmail.com"); int id = s.insert(user);
+		 * user.setUserId(id); Car car= new Car("TS08GP0730", "car1",4, "source",
+		 * "destination", "12:12:12:12"); System.out.println(c.addCar(car, id));
 		 */
-
-		Ride r = new Ride("done", user, user);
-		ServiceRide ride = new ServiceRide();
-		System.out.println(ride.insert(r));
-
-		// System.out.println(s.insert(user));
-		// user.setUserId(s.insert(user));
-		// System.out.println(s.update(user, "password", "pass1"));
-		// System.out.println(s.delet(user));
-
-		List<Ride> arr = ride.showRides();
-		Iterator<Ride> it = arr.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
-			System.out.println();
-		}
-
-		System.out.println(s.getUser(3));
+		
+		System.out.println(c.updateDeptTime("TS08GP0732", "12:1:1:7"));
+		System.out.println(c.updateSrcDest("TS08GP0732", "src", "dest"));
+		
+		
 	}
 }

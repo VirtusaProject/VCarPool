@@ -26,13 +26,14 @@ public class CarDao implements InterfaceCar {
 		try {
 			System.out.println(connection);
 			preparedStatement = connection.prepareStatement(
-					"insert into car (regno,carName,seatsAvailable,owner_id_fk,source,destination) values(?,?,?,?,?,?)");
+					"insert into car (regNo,carName,seatsAvailable,User_userId,source,destination,departureTime) values(?,?,?,?,?,?,?)");
 			preparedStatement.setString(1, car.getRegNo());
 			preparedStatement.setString(2, car.getCarName());
 			preparedStatement.setInt(3, car.getSeatsAvailable());
 			preparedStatement.setInt(4, fk);
 			preparedStatement.setString(5, car.getSource());
 			preparedStatement.setString(6, car.getDestination());
+			preparedStatement.setString(7, car.getDeptTime());
 			ret = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -128,7 +129,7 @@ public class CarDao implements InterfaceCar {
 		int ret = 0;
 		try {
 			System.out.println(connection);
-			preparedStatement = connection.prepareStatement("UPDATE car SET dept_time = ? where regNo= ?");
+			preparedStatement = connection.prepareStatement("UPDATE car SET departureTime = ? where regNo= ?");
 			preparedStatement.setString(1, timeUpdate);
 			preparedStatement.setString(2, regNum);
 			ret = preparedStatement.executeUpdate();
