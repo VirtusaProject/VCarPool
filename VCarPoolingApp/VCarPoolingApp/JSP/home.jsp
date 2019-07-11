@@ -1,9 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page session="true" language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+	if(session.getAttribute("userid")==null) {
+		response.sendRedirect("../JSP/login.jsp");
+	} else;
 
+%>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
