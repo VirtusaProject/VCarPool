@@ -10,6 +10,19 @@ public class Ride {
 	private int rideId;
 	private User rider;
 	private User provider;
+	public Ride(String status, User rider, User provider) {
+		super();
+		this.status = status;
+		this.rider = rider;
+		this.provider = provider;
+	}
+	public Ride(String status, int rideId, User rider, User provider) {
+		super();
+		this.status = status;
+		this.rideId = rideId;
+		this.rider = rider;
+		this.provider = provider;
+	}
 	@Override
 	public String toString() {
 		return "Ride [status=" + status + ", rideId=" + rideId + ", rider=" + rider + ", provider=" + provider + "]";

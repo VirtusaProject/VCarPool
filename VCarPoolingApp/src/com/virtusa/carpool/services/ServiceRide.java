@@ -25,7 +25,7 @@ public class ServiceRide {
 		return dao.update(r, feild, value);
 	}
 
-	public User delet(Ride r) throws VCarPoolException {
+	public Ride delet(Ride r) throws VCarPoolException {
 		// TODO Auto-generated method stub
 		return dao.delet(r);
 	}

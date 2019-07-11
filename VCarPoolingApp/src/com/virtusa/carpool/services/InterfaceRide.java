@@ -12,7 +12,7 @@ public interface InterfaceRide {
 
 	public int update(Ride r, String feild, String value) throws VCarPoolException;
 
-	public User delet(Ride r) throws VCarPoolException;
+	public Ride delet(Ride r) throws VCarPoolException;
 	
 	public List<Ride> showRides() throws VCarPoolException;
 	
