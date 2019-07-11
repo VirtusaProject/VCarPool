@@ -1,0 +1,43 @@
+package com.virtusa.carpool.model;
+
+public class Ride {
+
+	public Ride() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	private String status;
+	private int rideId;
+	private User rider;
+	private User provider;
+	@Override
+	public String toString() {
+		return "Ride [status=" + status + ", rideId=" + rideId + ", rider=" + rider + ", provider=" + provider + "]";
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getRideId() {
+		return rideId;
+	}
+	public void setRideId(int rideId) {
+		this.rideId = rideId;
+	}
+	public User getRider() {
+		return rider;
+	}
+	public void setRider(User rider) {
+		this.rider = rider;
+	}
+	public User getProvider() {
+		return provider;
+	}
+	public void setProvider(User provider) {
+		this.provider = provider;
+	}
+
+
+}
