@@ -1,5 +1,7 @@
 package com.virtusa.carpool.services;
 
+import java.util.ArrayList;
+
 import com.virtusa.carpool.dao.CarDao;
 import com.virtusa.carpool.exception.VCarPoolException;
 import com.virtusa.carpool.model.Car;
@@ -21,5 +23,9 @@ public class ServiceCar {
 
 	public boolean updateDeptTime(String regNum, String timeUpdate) throws VCarPoolException {
 		return dao.updateDeptTime(regNum, timeUpdate);
+	}
+
+	public ArrayList<Car> showCars(String source, String destination, String time) throws VCarPoolException {
+		return dao.showCars(source, destination, time);
 	}
 }

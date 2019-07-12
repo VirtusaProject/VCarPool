@@ -2,7 +2,9 @@ package com.virtusa.carpool.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -170,5 +172,36 @@ public class CarDao implements InterfaceCar {
 			return false;
 		}
 
+	}
+
+	@Override
+	public ArrayList<Car> showCars(String source, String destination, String time) throws VCarPoolException {
+		ArrayList<Car> arr= new ArrayList<Car>();
+		Connection connection = ConnectionUtil.getConnection();
+		PreparedStatement preparedStatement = null;
+		String query= "select * from car where  source=? and destination=? and departureTime=?";
+		Car car= null;
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,source);
+			preparedStatement.setString(2,destination);
+			preparedStatement.setString(3,time);
+			ResultSet rs= preparedStatement.executeQuery();
+			while(rs.next()) {
+				car= new Car();
+				car.setRegNo(rs.getString("regNo"));
+				car.setCarName(rs.getString("carName"));
+				car.setSeatsAvailable(rs.getInt("seatsAvailable"));
+				car.setSource(rs.getString("source"));
+				car.setDestination(rs.getString("destination"));
+				car.setDeptTime(rs.getString("departureTime"));
+				arr.add(car);
+				car=null;
+			}
+		} catch (SQLException e) {
+			logger.error("error",e);
+			throw new VCarPoolException(e.getMessage());
+		}
+		return arr;
 	}
 }
