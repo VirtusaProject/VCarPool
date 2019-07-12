@@ -1,4 +1,4 @@
-package com.virtusa.VpoolWeb.controller;
+package com.virtusa.carpool.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.virtusa.VpoolWeb.Exception.VpoolException;
-import com.virtusa.VpoolWeb.service.CarService;
+
+import com.virtusa.carpool.exception.VCarPoolException;
+import com.virtusa.carpool.services.ServiceCar;
 
 /**
  * Servlet implementation class UpdateSourceDestination
@@ -44,12 +45,12 @@ public class UpdateSourceDestination extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		String source=request.getParameter("source");
 		String destination=request.getParameter("destination");
-		CarService carservice=new CarService();
+		ServiceCar carservice=new ServiceCar();
 		String check="RJ07CA7496";
 		boolean checking=false;
 		 try {
 			checking=carservice.updateSrcDest(check,source,destination);
-		} catch (VpoolException e) {
+		} catch (VCarPoolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

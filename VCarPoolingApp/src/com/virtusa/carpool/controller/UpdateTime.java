@@ -1,4 +1,4 @@
-package com.virtusa.VpoolWeb.controller;
+package com.virtusa.carpool.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.virtusa.VpoolWeb.Exception.VpoolException;
-import com.virtusa.VpoolWeb.service.CarService;
+import com.virtusa.carpool.exception.VCarPoolException;
+import com.virtusa.carpool.services.ServiceCar;
+
 
 /**
  * Servlet implementation class UpdateTime
@@ -46,12 +47,12 @@ public class UpdateTime extends HttpServlet {
 		//String addition=":00";
 		//String finalTime=time+addition;
 		//System.out.println(finalTime);
-		CarService carservice=new CarService();
+		ServiceCar carservice=new ServiceCar();
 		boolean check=false;
 		String regNum="RJO7CA7496";
 		try {
 			check=carservice.updateDeptTime(regNum, time);
-		} catch (VpoolException e) {
+		} catch (VCarPoolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
