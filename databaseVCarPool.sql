@@ -18,8 +18,13 @@
 --
 -- Table structure for table `bill`
 --
+<<<<<<< HEAD
 create database carpoolDB;
 use carpoolDB;
+=======
+create database carpooldb;
+use carpooldb;
+>>>>>>> dc63a88d137adfcee498fc724d23a8b1bbfb5188
 DROP TABLE IF EXISTS `bill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
