@@ -45,6 +45,7 @@ if(obj!=null)
 				
 				
 				<input type="submit" value="Sign up" class="btn" onclick="return regValidate(password,password1);">
+				
 
 </body>
 </html>

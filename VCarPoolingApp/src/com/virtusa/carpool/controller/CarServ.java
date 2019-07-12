@@ -3,12 +3,13 @@ package com.virtusa.carpool.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import com.virtusa.carpool.exception.VCarPoolException;
 import com.virtusa.carpool.services.ServiceCar;
@@ -52,18 +53,27 @@ public class CarServ extends HttpServlet {
 		car.setSource(request.getParameter("source"));
 		car.setDestination(request.getParameter("destination"));
 		ServiceCar c=new ServiceCar();
-		int check=30;
+		HttpSession session= request.getSession();
+		Integer check= Integer.parseInt((String) session.getAttribute("userid"));
 		boolean checking=false;
+		RequestDispatcher dispatcher = null;
 		try {
 			 checking=c.addCar(car,check );
 		} catch (VCarPoolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(checking)
-			out.println("car added");
-		else
+		if(checking) {
+			
+			
+		session.setAttribute("userid", check);
+		dispatcher= request.getRequestDispatcher("/JSP/regSucess.jsp");
+		}
+		else {
 			out.println("car not added");
+		}
+			
+		dispatcher.forward(request,response);
 		
 		
 	}
