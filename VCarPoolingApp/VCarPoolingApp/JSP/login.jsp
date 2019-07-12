@@ -5,10 +5,10 @@
 <head>
 
 <%
-Object obj= session.getAttribute("message");
+Object obj= request.getAttribute("message");
 String message="";
 if(obj!=null)
-	 message=(String)session.getAttribute("message");
+	 message=(String)obj;
 %>
 
 <link href="/VCarPoolingApp/CSS/styles.css" rel="stylesheet"
@@ -25,7 +25,7 @@ if(obj!=null)
 <form method="post" action="/VCarPoolingApp/LoginControllerServlet" >
 		<div class="box">
 			<h1>Sign in - VCarPool</h1>
-			<h5 style="color:red;"><%=message %></h5>
+			<h3 style="color:red;"><%=message%></h3>
 	
 			<input type="text" name="userid" id="userid" required="required"
 				placeholder="enter user id" class="email" />
