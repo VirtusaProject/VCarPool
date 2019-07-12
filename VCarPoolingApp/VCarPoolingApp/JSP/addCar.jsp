@@ -25,6 +25,8 @@
 				type="text" name="seat" placeholder="Enter No of Seats"> <input
 				type="text" name="source" placeholder="Enter Source"> <input
 				type="text" name="destination" placeholder="Enter destination">
+				<input
+				type="time" name="time" id="time"  required />
 			<input type="submit" name="login" class="login login-submit"
 				value="submit">
 		</form>

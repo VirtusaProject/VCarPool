@@ -52,6 +52,7 @@ public class CarServ extends HttpServlet {
 		car.setSeatsAvailable(num);
 		car.setSource(request.getParameter("source"));
 		car.setDestination(request.getParameter("destination"));
+		car.setDeptTime(request.getParameter("time"));
 		ServiceCar c=new ServiceCar();
 		HttpSession session= request.getSession();
 		Integer check= Integer.parseInt((String) session.getAttribute("userid"));
