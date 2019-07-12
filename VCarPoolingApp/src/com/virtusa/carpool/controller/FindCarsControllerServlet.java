@@ -26,7 +26,10 @@ public class FindCarsControllerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getParameter("source");
+		 String source=request.getParameter("source");
+		 String destination=request.getParameter("destination");
+		 String time=request.getParameter("time");
+		 
 	}
 
 }
