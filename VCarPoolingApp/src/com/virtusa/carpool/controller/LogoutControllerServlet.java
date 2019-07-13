@@ -31,7 +31,7 @@ public class LogoutControllerServlet extends HttpServlet {
 		
 		HttpSession session= request.getSession();
 		session.invalidate();
-		response.sendRedirect("/VCarPoolingApp/HTML/index.html");
+		response.sendRedirect("/VCarPoolingApp/JSP/login.jsp");
 		
 	}
 

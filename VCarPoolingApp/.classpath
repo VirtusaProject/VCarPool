@@ -6,10 +6,13 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="lib" path="D:/KrishnaTeja/GitHub/VCarPool/JarFiles/log4j.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/KrishnaTeja/GitHub/VCarPool/JarFiles/mysql-connector-java-8.0.15.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="D:/KrishnaTeja/GitHub/VCarPool/JarFiles/log4j.jar"/>
+	<classpathentry kind="lib" path="D:/KrishnaTeja/GitHub/VCarPool/JarFiles/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="E:/games/Krishna Teja/github/VCarPool/JarFiles/jstl-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/games/Krishna Teja/github/VCarPool/JarFiles/log4j.jar"/>
+	<classpathentry exported="true" kind="lib" path="E:/games/Krishna Teja/github/VCarPool/JarFiles/mysql-connector-java-8.0.15.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
