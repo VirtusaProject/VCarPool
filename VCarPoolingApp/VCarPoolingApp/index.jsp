@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<form method="post" action="/VCarPoolingApp/FindCarsControllerServlet">
+	<form method="post" action="/VCarPoolApp/FindCarsControllerServlet">
 		<div class="box">
 			<h1>VCarPool - Pool Your Car</h1>
 			

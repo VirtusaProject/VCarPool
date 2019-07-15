@@ -4,31 +4,36 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link href="/VCarPoolingApp/CSS/styles.css" rel="stylesheet" type="text/css">
+<script src="/VCarpoolingApp/JS/validate.js" type="text/javascript"></script>
 <title>Add Car</title>
 
 </head>
 <body>
-	<h2>
-		hello
-		<%=session.getAttribute("userid")%>
-		add your car
-	</h2>
+	
 
 
 
 	<div class="login-card">
-		<h1>ADD CAR</h1>
+		
 		<form action="CarServ" method="post">
+		<div class="box">
+		<h2>
+		hello
+		<%=session.getAttribute("userid")%>
+		add your car
+	</h2>
 			<input type="text" name="regno"
-				placeholder="Enter Car Registration No"> <input type="text"
-				name="carname" placeholder="Enter Car Name"> <input
-				type="text" name="seat" placeholder="Enter No of Seats"> <input
-				type="text" name="source" placeholder="Enter Source"> <input
-				type="text" name="destination" placeholder="Enter destination">
+				placeholder="Enter Car Registration No" class="email" > <input type="text"
+				name="carname" placeholder="Enter Car Name" class="email" > <input
+				type="text" name="seat" placeholder="Enter No of Seats" class="email" > <input
+				type="text" name="source" placeholder="Enter Source" class="email"> <input
+				type="text" name="destination" placeholder="Enter destination" class="email" >
 				<input
-				type="time" name="time" id="time"  required />
-			<input type="submit" name="login" class="login login-submit"
-				value="submit">
+				type="time" name="time" id="time"  required / class="email"> <br>
+			<input type="submit" name="login" 
+				value="submit" class="btn">
+				</div>
 		</form>
 
 	</div>

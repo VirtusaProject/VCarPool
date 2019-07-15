@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.virtusa.carpool.exception.VCarPoolException;
+import com.virtusa.carpool.model.User;
 import com.virtusa.carpool.services.ServiceUser;
 
 /**
@@ -44,9 +45,14 @@ public class LoginControllerServlet extends HttpServlet {
 		try {
 			if(usr.login(uName, password)==1) {
 				out.println("login sucess!");
-				
+				User user= usr.getUser(uName);
 				HttpSession session=request.getSession();
-				session.setAttribute("userid", usr.getUser(uName).getUserName());
+				session.setAttribute("userid", user.getUserName());
+				session.setAttribute("username", user.getUserId());
+				session.setAttribute("usertype", user.getType());
+				session.setAttribute("useremail", user.getEmail());
+				out.print(user.getUserName()+user.getEmail()+user.getType());
+				
 				dispatcher= request.getRequestDispatcher("/JSP/home.jsp");
 				
 			}
@@ -63,7 +69,7 @@ public class LoginControllerServlet extends HttpServlet {
 			log.error("error-login controller", e);
 			e.getMessage();
 		}
-		dispatcher.forward(request, response);
+		//dispatcher.forward(request, response);
 	}
 
 }
