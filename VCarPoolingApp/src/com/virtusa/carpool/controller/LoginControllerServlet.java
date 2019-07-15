@@ -44,13 +44,11 @@ public class LoginControllerServlet extends HttpServlet {
 		RequestDispatcher dispatcher=null;
 		try {
 			if(usr.login(uName, password)==1) {
-				out.println("login sucess!");
 				User user= usr.getUser(uName);
 				HttpSession session=request.getSession();
 				session.setAttribute("userid", user.getUserName());
 				session.setAttribute("username", user.getUserId());
 				session.setAttribute("usertype", user.getType());
-				System.out.println(user.getEmail());
 				session.setAttribute("useremail", user.getEmail());
 				out.print(user.getUserName()+user.getEmail()+user.getType());
 				

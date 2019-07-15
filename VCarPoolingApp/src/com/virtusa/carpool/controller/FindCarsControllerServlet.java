@@ -42,14 +42,17 @@ public class FindCarsControllerServlet extends HttpServlet {
 		 String source=request.getParameter("source");
 		 String destination=request.getParameter("destination");
 		 String time=request.getParameter("time");
+		 String seats = request.getParameter("seats");
+		 Integer seat= Integer.parseInt(seats);
 		 request.setAttribute("source",source);
 		 request.setAttribute("destination",destination);
 		 request.setAttribute("time",time);
+		 request.setAttribute("seats",seat);
 		 RequestDispatcher dispatcher = null; 
 		// PrintWriter out= response.getWriter();
 		 //out.println(source+destination+time);
 		 try {
-			ArrayList<Car> arr= c.showCars(source, destination, time);
+			ArrayList<Car> arr= c.showCars(source, destination, time, seat);
 			
 			if(arr.size()>0) {
 				log.info("cars returned: ");

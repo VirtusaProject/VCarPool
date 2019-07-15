@@ -25,7 +25,7 @@ public class ServiceCar {
 		return dao.updateDeptTime(regNum, timeUpdate);
 	}
 
-	public ArrayList<Car> showCars(String source, String destination, String time) throws VCarPoolException {
-		return dao.showCars(source, destination, time);
+	public ArrayList<Car> showCars(String source, String destination, String time, int seats) throws VCarPoolException {
+		return dao.showCars(source, destination, time, seats);
 	}
 }

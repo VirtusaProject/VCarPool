@@ -175,17 +175,18 @@ public class CarDao implements InterfaceCar {
 	}
 
 	@Override
-	public ArrayList<Car> showCars(String source, String destination, String time) throws VCarPoolException {
+	public ArrayList<Car> showCars(String source, String destination, String time, int seats) throws VCarPoolException {
 		ArrayList<Car> arr= new ArrayList<Car>();
 		Connection connection = ConnectionUtil.getConnection();
 		PreparedStatement preparedStatement = null;
-		String query= "select * from car where  source=? and destination=? and departureTime=?";
+		String query= "select * from car where  source=? and destination=? and departureTime=? and seatsAvailable>=?";
 		Car car= null;
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1,source);
 			preparedStatement.setString(2,destination);
 			preparedStatement.setString(3,time);
+			preparedStatement.setInt(4,seats);
 			ResultSet rs= preparedStatement.executeQuery();
 			while(rs.next()) {
 				car= new Car();
@@ -201,7 +202,28 @@ public class CarDao implements InterfaceCar {
 		} catch (SQLException e) {
 			logger.error("error",e);
 			throw new VCarPoolException(e.getMessage());
+		} 
+		
+		finally {
+
+			// close pstmt,connection,result set also
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				throw new VCarPoolException(" error while closing a resource contact to admin");
+
+			}
+
 		}
+
+		
 		return arr;
 	}
 }
