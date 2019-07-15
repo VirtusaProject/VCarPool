@@ -10,7 +10,7 @@
 
 %>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Home - <%=session.getAttribute("userid")   %></title>
 </head>
 <body>
 <body>
