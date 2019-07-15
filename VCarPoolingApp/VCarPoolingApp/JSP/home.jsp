@@ -24,11 +24,8 @@
 </head>
 <body>
 <body>
-<h1><%=session.getAttribute("userid")%>, <%=session.getAttribute("username")%>, <%=session.getAttribute("useremail")%>, <%=session.getAttribute("usertype")%> </h1><br>
-<h2 id="user"> </h2>
-<div>
-<form action="/VCarPoolingApp/LogoutControllerServlet"><input type="submit" value="logout"></form>
-</div>
+
+
 
 </body>
 </body>

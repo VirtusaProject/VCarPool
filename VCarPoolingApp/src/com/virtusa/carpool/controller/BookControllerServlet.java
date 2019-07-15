@@ -53,19 +53,21 @@ public class BookControllerServlet extends HttpServlet {
 		Car car = new Car(carNo, carName, seats, carSource, carDest, carTime);
 		request.setAttribute("bookCars", car);
 		HttpSession session = request.getSession();
-		RequestDispatcher dispatcher;
-		if (session == null) {
+		RequestDispatcher dispatcher = null;
+		if (session.getAttribute("userid") == null) {
 			try {
 				dispatcher = request.getRequestDispatcher("/JSP/login.jsp");
-				dispatcher.forward(request, response);
+				
 			} catch (NullPointerException e) {
 				log.error("error", e);
 			}
 		}
-		else {
-			dispatcher = request.getRequestDispatcher("/JSP/booking.jsp");
-			dispatcher.forward(request, response);
-		}
+		
+		  else { dispatcher = request.getRequestDispatcher("/JSP/booking.jsp");
+		  
+		  }
+		 
+		dispatcher.forward(request, response);
 
 	}
 

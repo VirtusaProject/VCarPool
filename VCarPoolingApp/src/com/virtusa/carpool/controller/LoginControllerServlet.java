@@ -50,6 +50,7 @@ public class LoginControllerServlet extends HttpServlet {
 				session.setAttribute("userid", user.getUserName());
 				session.setAttribute("username", user.getUserId());
 				session.setAttribute("usertype", user.getType());
+				System.out.println(user.getEmail());
 				session.setAttribute("useremail", user.getEmail());
 				out.print(user.getUserName()+user.getEmail()+user.getType());
 				
@@ -69,7 +70,7 @@ public class LoginControllerServlet extends HttpServlet {
 			log.error("error-login controller", e);
 			e.getMessage();
 		}
-		//dispatcher.forward(request, response);
+		dispatcher.forward(request, response);
 	}
 
 }
