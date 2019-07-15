@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.virtusa.carpool.model.Car;
 
 /**
@@ -18,6 +20,7 @@ import com.virtusa.carpool.model.Car;
  */
 @WebServlet("/BookControllerServlet")
 public class BookControllerServlet extends HttpServlet {
+	Logger log = Logger.getLogger(BookControllerServlet.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -50,16 +53,19 @@ public class BookControllerServlet extends HttpServlet {
 		Car car = new Car(carNo, carName, seats, carSource, carDest, carTime);
 		request.setAttribute("bookCars", car);
 		HttpSession session = request.getSession();
-		RequestDispatcher dispatcher = null;
-		if (session.getAttribute("userid") == null) {
-			dispatcher = request.getRequestDispatcher("../JSP/login.jsp");
+		RequestDispatcher dispatcher;
+		if (session == null) {
+			try {
+				dispatcher = request.getRequestDispatcher("/JSP/login.jsp");
+				dispatcher.forward(request, response);
+			} catch (NullPointerException e) {
+				log.error("error", e);
+			}
+		}
+		else {
+			dispatcher = request.getRequestDispatcher("/JSP/booking.jsp");
 			dispatcher.forward(request, response);
-		} /*
-			 * else { dispatcher = request.getRequestDispatcher("../JSP/booking.jsp");
-			 * dispatcher.forward(request, response); }
-			 */
-			
-		
+		}
 
 	}
 
