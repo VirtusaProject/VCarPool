@@ -12,7 +12,7 @@
 	if(session.getAttribute("userid")==null) {
 		response.sendRedirect("../JSP/login.jsp");
 		
-	} else;
+	} else;  
 	
 	
 %>
