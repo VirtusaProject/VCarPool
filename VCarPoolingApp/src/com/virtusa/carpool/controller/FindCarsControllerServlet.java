@@ -61,7 +61,7 @@ public class FindCarsControllerServlet extends HttpServlet {
 			  else { dispatcher =request.getRequestDispatcher("/HTML/error.html"); }
 			 
 		} catch (VCarPoolException e) {
-			// TODO Auto-generated catch block
+
 			System.out.println(e.getMessage());;
 		}
 		 dispatcher.forward(request,response);

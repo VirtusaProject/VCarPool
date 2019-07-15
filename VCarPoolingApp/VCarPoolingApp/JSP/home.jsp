@@ -18,11 +18,9 @@
 %>
 
 <meta charset="ISO-8859-1">
-<<<<<<< HEAD
+
 <title>Home - <%=session.getAttribute("userid")   %></title>
-=======
-<title>home <%=session.getAttribute("userid") %></title>
->>>>>>> 5d6d324d39e7c2e7d47d110120838f037ce78f8f
+
 </head>
 <body>
 <body>
