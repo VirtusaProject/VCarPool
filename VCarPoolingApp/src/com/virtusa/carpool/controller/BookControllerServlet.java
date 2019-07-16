@@ -50,10 +50,9 @@ public class BookControllerServlet extends HttpServlet {
 		 * PrintWriter out= response.getWriter(); Car car= new
 		 * Car(carNo,carName,seats,carSource,carDest,carTime); out.println(car);
 		 */
-
-		Car car = new Car(carNo, carName, seats, carSource, carDest, carTime);
-		request.setAttribute("bookCars", car);
 		HttpSession session = request.getSession();
+		Car car = new Car(carNo, carName, seats, carSource, carDest, carTime);
+		session.setAttribute("bookCars", car);
 		RequestDispatcher dispatcher = null;
 		if (session.getAttribute("userid") == null) {
 			try {

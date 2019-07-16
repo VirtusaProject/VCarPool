@@ -10,10 +10,10 @@
 </head>
 <body>
 <% 
-Object obj= request.getAttribute("resultArray");
+Object obj= session.getAttribute("resultArray");
 ArrayList<Car> list = (ArrayList<Car>) obj; 
 %>
-
+ <%if(list.size()>0) { %>
 
 <table border="1">
 <tr>
@@ -37,6 +37,8 @@ ArrayList<Car> list = (ArrayList<Car>) obj;
  <td>  <input  type="submit" value="book"></form></td>
 </tr>
 <%} %>
+<%} else { %>
+<h1>No cars available for request <a href="/VCarPoolingApp/index.jsp">click here to go home</a></h1>  <%} %>
 </table>
 </body>
 </html>

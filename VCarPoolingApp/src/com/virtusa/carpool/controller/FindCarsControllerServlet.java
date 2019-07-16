@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -22,59 +23,58 @@ import com.virtusa.carpool.services.ServiceCar;
  */
 @WebServlet("/FindCarsControllerServlet")
 public class FindCarsControllerServlet extends HttpServlet {
-	Logger log= Logger.getLogger(FindCarsControllerServlet.class);
+	Logger log = Logger.getLogger(FindCarsControllerServlet.class);
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FindCarsControllerServlet() {
-        super();
-        
-    }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		 ServiceCar c= new ServiceCar();
-		 String source=request.getParameter("source");
-		 String destination=request.getParameter("destination");
-		 String time=request.getParameter("time");
-		 String seats = request.getParameter("seats");
-		 Integer seat= Integer.parseInt(seats);
-		 request.setAttribute("source",source);
-		 request.setAttribute("destination",destination);
-		 request.setAttribute("time",time);
-		 request.setAttribute("seats",seat);
-		 RequestDispatcher dispatcher = null; 
+	public FindCarsControllerServlet() {
+		super();
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		ServiceCar c = new ServiceCar();
+		String source = request.getParameter("source");
+		String destination = request.getParameter("destination");
+		String time = request.getParameter("time");
+		String seats = request.getParameter("seats");
+		Integer seat = Integer.parseInt(seats);
+		HttpSession session= request.getSession();
+		session.setAttribute("source", source);
+		session.setAttribute("destination", destination);
+		session.setAttribute("time", time);
+		session.setAttribute("seats", seat);
+		RequestDispatcher dispatcher = null;
 		// PrintWriter out= response.getWriter();
-		 //out.println(source+destination+time);
-		 try {
-			ArrayList<Car> arr= c.showCars(source, destination, time, seat);
-			
-			if(arr.size()>0) {
+		// out.println(source+destination+time);
+		try {
+			ArrayList<Car> arr = c.showCars(source, destination, time, seat);
+			session.setAttribute("resultArray", arr);
+			if (arr.size() > 0) {
 				log.info("cars returned: ");
 				log.info(arr);
-				request.setAttribute("resultArray", arr);
-				dispatcher =request.getRequestDispatcher("/JSP/result.jsp");	
 			}
+			dispatcher = request.getRequestDispatcher("/JSP/result.jsp");
 			
-			  else { dispatcher =request.getRequestDispatcher("/HTML/error.html"); }
-			 
 		} catch (VCarPoolException e) {
 
 			System.out.println(e.getMessage());
-		} try {
-			dispatcher.forward(request,response);
-		} catch(Exception e) {
+		}
+		try {
+			dispatcher.forward(request, response);
+		} catch (Exception e) {
 			log.error("error", e);
 			System.out.println(e.getMessage());
 		}
-		
-		 
-		 
+
 	}
 
 }

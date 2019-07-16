@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>booking</title>
 <%
-Object obj= request.getAttribute("bookCars");
+Object obj= session.getAttribute("bookCars");
 Car cars=(Car)obj;
 
 %>
@@ -20,7 +20,7 @@ Car cars=(Car)obj;
 	<input type="text" readonly="readonly"  id ="bCarSource" value=<%=cars.getSource() %> />
 	<input type="text" readonly="readonly"  id ="bCarDest" value=<%=cars.getDestination() %> />
 	<input type="text" readonly="readonly" id="bCarTime" value=<%=cars.getDeptTime() %> />
-	<input type="text" readonly="readonly"  name="bSeatsAvailable" value=<%=cars.getSeatsAvailable() %> />
+	<input type="text" readonly="readonly"  name="bSeatsAvailable" value=<%=session.getAttribute("seats")%>/>
 	<input type="text" readonly="readonly"  id="fare" value="40" />
 	<input type="submit" value="Confirm" />
 	</form>

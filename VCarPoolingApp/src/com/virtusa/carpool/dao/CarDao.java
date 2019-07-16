@@ -232,7 +232,6 @@ public class CarDao implements InterfaceCar {
 		
 		Connection connection = ConnectionUtil.getConnection();
 		PreparedStatement preparedStatement = null,pst=null;
-		boolean ret=false;
 		int seat=0,check=0;
 		try {
 			preparedStatement= connection.prepareStatement("select seatsAvailable from car where regNo=?");
@@ -242,7 +241,7 @@ public class CarDao implements InterfaceCar {
 			if(rs.next())
 				seat=rs.getInt(1);
 			
-			if(seat>seats) {
+			if(seat>=seats) {
 				seat=seat-seats;
 				System.out.println(seat);
 				pst = connection.prepareStatement("UPDATE car SET seatsAvailable = ? where regNo= ?");

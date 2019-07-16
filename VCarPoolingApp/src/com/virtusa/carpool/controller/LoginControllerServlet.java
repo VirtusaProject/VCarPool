@@ -22,53 +22,68 @@ import com.virtusa.carpool.services.ServiceUser;
  */
 @WebServlet("/LoginControllerServlet")
 public class LoginControllerServlet extends HttpServlet {
-	static Logger log= Logger.getLogger(LoginControllerServlet.class);
+	static Logger log = Logger.getLogger(LoginControllerServlet.class);
 	static ServiceUser usr = new ServiceUser();
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginControllerServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uName=Integer.parseInt(request.getParameter("userid"));
-		PrintWriter out= response.getWriter();
-		String password= request.getParameter("password");
-		RequestDispatcher dispatcher=null;
+	public LoginControllerServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int uName = Integer.parseInt(request.getParameter("userid"));
+		PrintWriter out = response.getWriter();
+		String password = request.getParameter("password");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/HTML/error.html");
 		try {
-			if(usr.login(uName, password)==1) {
-				User user= usr.getUser(uName);
-				HttpSession session=request.getSession();
+			if (usr.login(uName, password) == 1) {
+				User user = usr.getUser(uName);
+				HttpSession session = request.getSession();
 				session.setAttribute("userid", user.getUserName());
 				session.setAttribute("username", user.getUserId());
 				session.setAttribute("usertype", user.getType());
 				session.setAttribute("useremail", user.getEmail());
-				out.print(user.getUserName()+user.getEmail()+user.getType());
-				
-				dispatcher= request.getRequestDispatcher("/JSP/home.jsp");
-				
-			}
-			else {
+				out.print(user.getUserName() + user.getEmail() + user.getType());
+				if (session.getAttribute("source") == null) {
+					dispatcher = request.getRequestDispatcher("/JSP/home.jsp");
+					dispatcher.forward(request, response);
+				}
+
+				else {
+					System.out.println("else block");
+					
+					dispatcher = request.getRequestDispatcher("/JSP/result.jsp");
+					//System.out.println(request.getRequestDispatcher("/JSP/result.jsp"));
+					dispatcher.forward(request, response);
+				}
+
+			} else {
 				request.setAttribute("message", "username / password incorrect");
 				out.println("not sucess");
-				dispatcher= request.getRequestDispatcher("/JSP/login.jsp");
-				
+				dispatcher = request.getRequestDispatcher("/JSP/login.jsp");
+				dispatcher.forward(request, response);
+
 			}
 		} catch (VCarPoolException e) {
 			// TODO Auto-generated catch block
-			dispatcher= request.getRequestDispatcher("/HTML/error.html");
-			
+			dispatcher = request.getRequestDispatcher("/HTML/error.html");
+			dispatcher.forward(request, response);
+
 			log.error("error-login controller", e);
-			e.getMessage();
+			log.error(e.getMessage());
 		}
-		dispatcher.forward(request, response);
+		/*
+		 * log.info(dispatcher); dispatcher.forward(request, response);
+		 */
 	}
 
 }

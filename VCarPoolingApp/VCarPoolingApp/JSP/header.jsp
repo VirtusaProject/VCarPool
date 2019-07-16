@@ -8,6 +8,11 @@
 	<h1 font-style: italic; color: black > V-CarPooling</h1>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="/VCarPoolingApp/VCarPoolingApp/css/bootstrap.min.css" />
-	<link type="text/css" rel="stylesheet" href="/VCarPoolingApp/VCarPoolingApp/css/style.css" />
+	<link type="text/css" rel="stylesheet" href="/VCarPoolingApp/VCarPoolingApp/css/styles.css" />
 </head>
+
+<header>
+
+
+</header>
     
