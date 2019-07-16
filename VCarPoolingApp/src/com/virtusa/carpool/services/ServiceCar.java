@@ -27,12 +27,9 @@ public class ServiceCar {
 
 	public ArrayList<Car> showCars(String source, String destination, String time, int seats) throws VCarPoolException {
 		return dao.showCars(source, destination, time, seats);
-<<<<<<< HEAD
 	}
 	
 	public boolean bookCar(String regNo, int seats) throws VCarPoolException {
 		return dao.bookCar(regNo,seats);
-=======
->>>>>>> c18b892778682a91cba4b628c840e394fbe03367
 	}
 }
