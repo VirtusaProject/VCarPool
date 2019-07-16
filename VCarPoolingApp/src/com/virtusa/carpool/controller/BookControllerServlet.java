@@ -45,7 +45,10 @@ public class BookControllerServlet extends HttpServlet {
 		String carTime = request.getParameter("cartime");
 		String carSeats = request.getParameter("carseats");
 		Integer seats = Integer.parseInt(carSeats);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> c18b892778682a91cba4b628c840e394fbe03367
 		/*
 		 * PrintWriter out= response.getWriter(); Car car= new
 		 * Car(carNo,carName,seats,carSource,carDest,carTime); out.println(car);
