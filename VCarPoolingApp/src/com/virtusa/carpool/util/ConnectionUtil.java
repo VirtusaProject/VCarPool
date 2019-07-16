@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 public class ConnectionUtil {
 
 	public ConnectionUtil() {
-		// TODO Auto-generated constructor stub
 	}
 
 	static Logger log = Logger.getLogger(ConnectionUtil.class);
@@ -19,7 +18,7 @@ public class ConnectionUtil {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+
 			log.error("class not found", e);
 			throw new com.virtusa.carpool.exception.VCarPoolException("class not found!");
 

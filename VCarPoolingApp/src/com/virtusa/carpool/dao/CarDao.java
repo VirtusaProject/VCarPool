@@ -175,17 +175,18 @@ public class CarDao implements InterfaceCar {
 	}
 
 	@Override
-	public ArrayList<Car> showCars(String source, String destination, String time) throws VCarPoolException {
+	public ArrayList<Car> showCars(String source, String destination, String time, int seats) throws VCarPoolException {
 		ArrayList<Car> arr= new ArrayList<Car>();
 		Connection connection = ConnectionUtil.getConnection();
 		PreparedStatement preparedStatement = null;
-		String query= "select * from car where  source=? and destination=? and departureTime=?";
+		String query= "select * from car where  source=? and destination=? and departureTime=? and seatsAvailable>=?";
 		Car car= null;
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1,source);
 			preparedStatement.setString(2,destination);
 			preparedStatement.setString(3,time);
+			preparedStatement.setInt(4,seats);
 			ResultSet rs= preparedStatement.executeQuery();
 			while(rs.next()) {
 				car= new Car();
@@ -201,7 +202,100 @@ public class CarDao implements InterfaceCar {
 		} catch (SQLException e) {
 			logger.error("error",e);
 			throw new VCarPoolException(e.getMessage());
+		} 
+		
+		finally {
+
+			// close pstmt,connection,result set also
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				throw new VCarPoolException(" error while closing a resource contact to admin");
+
+			}
+
 		}
+
+		
 		return arr;
 	}
-}
+
+	@Override
+	public boolean bookCar(String regNo, int seats) throws VCarPoolException {
+		
+		Connection connection = ConnectionUtil.getConnection();
+		PreparedStatement preparedStatement = null,pst=null;
+		boolean ret=false;
+		int seat=0,check=0;
+		try {
+			preparedStatement= connection.prepareStatement("select seatsAvailable from car where regNo=?");
+			preparedStatement.setString(1, regNo);
+			ResultSet rs= preparedStatement.executeQuery();
+			 
+			if(rs.next())
+				seat=rs.getInt(1);
+			
+			if(seat>seats) {
+				seat=seat-seats;
+				System.out.println(seat);
+				pst = connection.prepareStatement("UPDATE car SET seatsAvailable = ? where regNo= ?");
+				pst.setInt(1, seat);
+				pst .setString(2, regNo);
+				check=pst.executeUpdate();
+			} 
+			
+			
+			
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logger.error("error with SQL", e);
+			throw new VCarPoolException(e.getMessage());
+		} catch (Exception exception) {
+
+			logger.error("error with system", exception);
+			throw new VCarPoolException("Some internal error contact to admin");
+
+		}
+
+		finally {
+
+			// close pstmt,connection,result set also
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connection.close();
+				}
+				
+				
+			} catch (SQLException e) {
+				// TODO: handle exception
+				throw new VCarPoolException(" error while closing a resource contact to admin");
+
+			}
+
+		}
+
+		if(check>0)
+			return true;
+		else
+			return false;
+
+	}
+
+		
+		
+		
+	}
+

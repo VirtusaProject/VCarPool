@@ -35,13 +35,6 @@ if(obj!=null)
 				 <a href="/VCarPoolingApp/JSP/register.jsp"><div id="btn2">Sign Up</div></a> <!-- End Btn2 -->
   
 </div> <!-- End Box -->
-  
 </form>
-
-<p>Forgot your password? <u style="color:#f1c40f;">Click Here!</u></p>
-				 
-
-
-
 </body>
 </html>

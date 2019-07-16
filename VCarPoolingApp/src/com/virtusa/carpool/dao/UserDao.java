@@ -249,6 +249,7 @@ public class UserDao implements InterfaceUser {
 				user.setUserName(rs.getString("userName"));
 				user.setPassword(rs.getString("password"));
 				user.setType(rs.getString("type"));
+				user.setEmail(rs.getString("email"));
 			}
 
 		} catch (SQLException e) {

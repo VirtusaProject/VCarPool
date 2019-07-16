@@ -44,7 +44,6 @@ public class LoginControllerServlet extends HttpServlet {
 		RequestDispatcher dispatcher=null;
 		try {
 			if(usr.login(uName, password)==1) {
-				out.println("login sucess!");
 				User user= usr.getUser(uName);
 				HttpSession session=request.getSession();
 				session.setAttribute("userid", user.getUserName());
@@ -69,7 +68,7 @@ public class LoginControllerServlet extends HttpServlet {
 			log.error("error-login controller", e);
 			e.getMessage();
 		}
-		//dispatcher.forward(request, response);
+		dispatcher.forward(request, response);
 	}
 
 }

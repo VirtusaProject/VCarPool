@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<form method="post" action="/VCarPoolApp/FindCarsControllerServlet">
+	<form method="post" action="/VCarPoolingApp/FindCarsControllerServlet">
 		<div class="box">
 			<h1>VCarPool - Pool Your Car</h1>
 			
@@ -23,6 +23,9 @@
 				type="text" name="destination" required="required"
 				placeholder="enter your destination" class="email" />
 				<input type="time" name="time" required="required" id="time"  class="email" placeholder="enter departure time"/>
+				 <input type="text" name="seats" required="required" id="seats"
+				placeholder="enter no of seats" class="email" /> 
+				 
 				 <center><input type="submit" value="Find Cars" class="btn"></center>
 			<!-- End Btn -->
 

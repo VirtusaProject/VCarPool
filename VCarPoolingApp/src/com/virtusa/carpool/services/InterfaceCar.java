@@ -13,6 +13,8 @@ public interface InterfaceCar {
 
 	public boolean updateDeptTime(String regNum, String timeUpdate) throws VCarPoolException;
 	
-	public ArrayList<Car> showCars(String source, String destination, String time) throws VCarPoolException;
+	public ArrayList<Car> showCars(String source, String destination, String time,int seats) throws VCarPoolException;
+	
+	public boolean bookCar(String regNo, int seats) throws VCarPoolException;
 
 }
