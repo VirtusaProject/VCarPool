@@ -17,11 +17,21 @@ import com.virtusa.carpool.util.ConnectionUtil;
 
 public class UserDao implements InterfaceUser {
 	static Logger log = Logger.getLogger(UserDao.class);
+	public static UserDao dao=null;
 
-	public UserDao() {
+	private UserDao() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
+	public static UserDao getDao() {
+		if(dao==null) {
+			dao= new UserDao();
+		}
+		return dao;
+	}
+	
+	
 	@Override
 	public int insert(User u) throws VCarPoolException {
 

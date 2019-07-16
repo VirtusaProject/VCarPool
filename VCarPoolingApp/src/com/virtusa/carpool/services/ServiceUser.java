@@ -11,7 +11,7 @@ public class ServiceUser {
 	public ServiceUser() {
 		// TODO Auto-generated constructor stub
 	}
-	 public static UserDao dao=  new UserDao();
+	 public static UserDao dao=  UserDao.getDao();
 	public int insert(User u) throws VCarPoolException {
 		// TODO Auto-generated method stub
 		return dao.insert(u);
