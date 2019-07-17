@@ -3,11 +3,13 @@ package com.virtusa.carpool.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import org.apache.log4j.Logger;
 
@@ -39,12 +41,14 @@ public class ConfirmControllerServlet extends HttpServlet {
 		PrintWriter out= response.getWriter();
 		String regNo=request.getParameter("bCarNo");
 		int seats=Integer.parseInt(request.getParameter("bSeatsAvailable"));
+		RequestDispatcher dispatcher = null;
 		try {
 			boolean status=carserv.bookCar(regNo,seats );
 			if(status) {
-				out.println("sucess");
+				dispatcher = request.getRequestDispatcher("/JSP/bookingSucess.jsp");
+				dispatcher.forward(request, response);
 			}
-			else out.println("failed");
+			else out.println("<h1>failed</h1>");
 		} catch (VCarPoolException e) {
 			log.error("error",e);
 			e.printStackTrace();
