@@ -12,11 +12,11 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
+	@Column(name = "userId")
 	private long userId;
 	
 
-	@Column(name = "name")
+	@Column(name = "userName")
 	private String userName;
 	@Column(name = "password")
 	private String password;
