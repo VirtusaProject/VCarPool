@@ -38,7 +38,7 @@ public class UserDao implements InterfaceUser {
 		int result = 0;
 		Session session = HibernateUtil.getFactory().openSession();
 		Transaction transaction = session.beginTransaction();
-		result= (int) session.save(u);
+		result = (int) session.save(u);
 		transaction.commit();
 		session.close();
 		return result;
@@ -46,113 +46,37 @@ public class UserDao implements InterfaceUser {
 
 	@Override
 	public int update(User u, String feild, String value) throws VCarPoolException {
+		int result = 0;
+		Session session = HibernateUtil.getFactory().openSession();
+		Transaction transaction = session.beginTransaction();
 
-		Connection con = ConnectionUtil.getConnection();
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-		int key = 0;
-		String query = "update user set " + feild + "=? where userId= ?";
+		User user = (User) session.load(User.class, u.getUserId());
 
-		System.out.println(query);
-		try {
-			pst = con.prepareStatement(query);
-
-			pst.setString(1, value);
-			pst.setInt(2, u.getUserId());
-			key = pst.executeUpdate();
-		} catch (SQLException e) {
-			log.error("update error- dao", e);
-			throw new VCarPoolException("error-dao-update");
-		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-			if (pst != null)
-				try {
-					pst.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-		}
-
-		return key;
+		transaction.commit();
+		session.close();
+		return result;
 	}
 
 	@Override
 	public User delet(User u) throws VCarPoolException {
-		User temp = u;
+		User result = null;
+		Session session = HibernateUtil.getFactory().openSession();
+		Transaction transaction = session.beginTransaction();
 
-		Connection con = ConnectionUtil.getConnection();
-		PreparedStatement pst = null;
-		int key = 0;
-		String query = "delete from user where userId=?";
-		try {
-			pst = con.prepareStatement(query);
-			pst.setInt(1, u.getUserId());
-			key = pst.executeUpdate();
-			if (key > 0)
-				return temp;
-			else
-				return null;
-		} catch (SQLException e) {
-			log.error("deletion error- dao", e);
-			throw new VCarPoolException("error in deleting data");
-		} finally {
+		session.delete(u);
 
-			if (pst != null)
-				try {
-					pst.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-		}
-
+		transaction.commit();
+		session.close();
+		return result;
 	}
 
 	@Override
 	public List<User> showUsers() throws VCarPoolException {
-		ArrayList<User> arr = new ArrayList<User>();
-		ResultSet rs = null;
-		Connection con = ConnectionUtil.getConnection();
-		Statement st = null;
-		String query = "select * from user";
-		try {
-			st = con.createStatement();
-			rs = st.executeQuery(query);
-			if (rs == null)
-				return null;
-			else {
-				User user = null;
-				while (rs.next()) {
-					user = new User();
-					user.setUserId(rs.getInt("userId"));
-					user.setUserName(rs.getString("userName"));
-					user.setPassword(rs.getString("password"));
-					user.setType(rs.getString("type"));
-					arr.add(user);
-					user = null;
-				}
-			}
-		} catch (SQLException e) {
-			log.error("selection error- dao", e);
-			throw new VCarPoolException("error in selecting data");
-		}
-
+		List<User> arr = null;
+		
+		
+		
+		
 		return arr;
 	}
 
