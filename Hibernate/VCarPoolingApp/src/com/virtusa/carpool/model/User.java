@@ -7,25 +7,33 @@ import javax.persistence.*;
 public class User {
 
 	public User() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private long userId;
+	
+
 	@Column(name = "name")
 	private String userName;
 	@Column(name = "password")
 	private String password;
 	@Column(name = "email", unique = true)
 	private String email;
+	
+	@Column(name = "type")
+	private String type;
 
-	@OneToOne
-	private Rider rider;
-	/*
-	 * @OneToOne private Provider provider;
-	 */
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public long getUserId() {
 		return userId;
