@@ -3,7 +3,7 @@ package com.virtusa.carpool.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
 	public User() {
@@ -12,18 +12,25 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private int userId;
+	@Column(name = "id")
+	private long userId;
+	@Column(name = "name")
 	private String userName;
+	@Column(name = "password")
 	private String password;
-
-	private String type;
+	@Column(name = "email", unique = true)
 	private String email;
-
-	public int getUserId() {
+	
+	@OneToOne
+	private Rider rider;
+	@OneToOne
+	private Provider provider;
+	
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -43,27 +50,17 @@ public class User {
 		this.password = password;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	
-
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", type=" + type
-				+ ", email=" + email + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", email=" + email
+				+ "]";
 	}
 
 	public User(String userName, String password, String type) {
 		super();
 		this.userName = userName;
 		this.password = password;
-		this.type = type;
+
 	}
 
 	public String getEmail() {
