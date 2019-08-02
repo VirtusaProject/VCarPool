@@ -1,45 +1,23 @@
 package com.virtusa.carpool.model;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "user")
 public class User {
 
 	public User() {
-
+		// TODO Auto-generated constructor stub
 	}
 
-	@Id
-	@GeneratedValue
-	@Column(name = "userId")
-	private long userId;
-	
-
-	@Column(name = "userName")
+	private int userId;
 	private String userName;
-	@Column(name = "password")
 	private String password;
-	@Column(name = "email", unique = true)
-	private String email;
-	
-	@Column(name = "type")
+
 	private String type;
+	private String email;
 
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -59,17 +37,27 @@ public class User {
 		this.password = password;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", email=" + email
-				+ "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", type=" + type
+				+ ", email=" + email + "]";
 	}
 
 	public User(String userName, String password, String type) {
 		super();
 		this.userName = userName;
 		this.password = password;
-
+		this.type = type;
 	}
 
 	public String getEmail() {
