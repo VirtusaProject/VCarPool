@@ -32,11 +32,7 @@ public class VCarPoolApp {
 
 	public static void main(String[] args) throws VCarPoolException {
 
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-
-		SessionFactory factory = meta.getSessionFactoryBuilder().build();
-		Session session = factory.openSession();
+		Session session= HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 
 		User user = new User();
@@ -45,7 +41,7 @@ public class VCarPoolApp {
 		user.setUserName("user1");
 		user.setType("provider");
 
-		session.persist(user);
+		session.save(user);
 		transaction.commit();
 		session.close();
 
