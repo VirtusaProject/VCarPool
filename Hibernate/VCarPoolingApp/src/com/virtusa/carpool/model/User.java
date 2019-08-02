@@ -1,16 +1,26 @@
 package com.virtusa.carpool.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
 
 	public User() {
-		// TODO Auto-generated constructor stub
+
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private int userId;
+	@Column(name = "name")
 	private String userName;
+	@Column(name = "password")
 	private String password;
-
+	@Column(name = "type")
 	private String type;
+	@Column(name = "email")
 	private String email;
 
 	public int getUserId() {
@@ -44,8 +54,6 @@ public class User {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	
 
 	@Override
 	public String toString() {

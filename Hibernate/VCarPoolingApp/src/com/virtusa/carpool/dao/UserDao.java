@@ -9,74 +9,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.virtusa.carpool.exception.VCarPoolException;
 import com.virtusa.carpool.model.User;
 import com.virtusa.carpool.services.InterfaceUser;
 import com.virtusa.carpool.util.ConnectionUtil;
+import com.virtusa.carpool.util.HibernateUtil;
 
 public class UserDao implements InterfaceUser {
 	static Logger log = Logger.getLogger(UserDao.class);
-	public static UserDao dao=null;
+	public static UserDao dao = null;
 
 	private UserDao() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	public static UserDao getDao() {
-		if(dao==null) {
-			dao= new UserDao();
+		if (dao == null) {
+			dao = new UserDao();
 		}
 		return dao;
 	}
-	
-	
+
 	@Override
 	public int insert(User u) throws VCarPoolException {
-
-		Connection con = ConnectionUtil.getConnection();
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-		int key = 0;
-		String query = "insert into user(userName, password, type, email) values(?,?,?,?)";
-		try {
-			pst = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, u.getUserName());
-			pst.setString(2, u.getPassword());
-
-			pst.setString(3, u.getType());
-			pst.setString(4, u.getEmail());
-			pst.executeUpdate();
-			rs = pst.getGeneratedKeys();
-			if (rs.next())
-				key = rs.getInt(1);
-		} catch (SQLException e) {
-			log.error("error-dao", e);
-			throw new VCarPoolException("exception-dao");
-		} finally {
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-			if (pst != null)
-				try {
-					pst.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					throw new VCarPoolException();
-				}
-		}
-
-		return key;
-
+		int result = 0;
+		Session session = HibernateUtil.getFactory().openSession();
+		Transaction transaction = session.beginTransaction();
+		result= (int) session.save(u);
+		transaction.commit();
+		session.close();
+		return result;
 	}
 
 	@Override
@@ -293,18 +258,18 @@ public class UserDao implements InterfaceUser {
 	public int getUserEmail(String email) throws VCarPoolException {
 		Connection con = ConnectionUtil.getConnection();
 		String query = "select email from user where email=?";
-		PreparedStatement pst=null;
-		ResultSet rs=null;
-		int result=0;
-		
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		int result = 0;
+
 		try {
-			pst=con.prepareStatement(query);
+			pst = con.prepareStatement(query);
 			pst.setString(1, email);
-			rs=pst.executeQuery();
-			if(rs.next())
-				result=1;
+			rs = pst.executeQuery();
+			if (rs.next())
+				result = 1;
 		} catch (SQLException e) {
-			log.error(e.getMessage(),e);
+			log.error(e.getMessage(), e);
 			throw new VCarPoolException(e.getMessage());
 		}
 		return result;
