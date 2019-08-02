@@ -1,7 +1,8 @@
 package com.virtusa.carpool.model;
 
 import javax.persistence.*;
-
+@Entity
+@Table(name = "rider")
 public class Rider {
 
 	public Rider() {
@@ -10,6 +11,7 @@ public class Rider {
 
 	
 	@Id
+	@Column(name = "id")
 	private long id;
 	
 	@OneToOne

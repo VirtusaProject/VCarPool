@@ -20,12 +20,13 @@ public class User {
 	private String password;
 	@Column(name = "email", unique = true)
 	private String email;
-	
+
 	@OneToOne
 	private Rider rider;
-	@OneToOne
-	private Provider provider;
-	
+	/*
+	 * @OneToOne private Provider provider;
+	 */
+
 	public long getUserId() {
 		return userId;
 	}

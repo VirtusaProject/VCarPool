@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import com.virtusa.carpool.exception.VCarPoolException;
 import com.virtusa.carpool.model.Bill;
@@ -28,10 +31,18 @@ public class VCarPoolApp {
 
 	public static void main(String[] args) throws VCarPoolException {
 		
-		Session session= HibernateUtil.getSessionFactory().openSession();
+		
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = session.beginTransaction();
 		
 		User user = new User();
-		user.setEmail("krishnateja@gmail.com");
+		user.setEmail("krhnteja@gmail.com");
+		user.setPassword("password");
+		user.setUserName("user1");
+		session.save(user);
+		transaction.commit();
+		session.close();
 		
 	}
 }
