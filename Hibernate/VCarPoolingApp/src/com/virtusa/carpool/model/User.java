@@ -12,9 +12,9 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = "userId")
 	private int userId;
-	@Column(name = "name")
+	@Column(name = "userName")
 	private String userName;
 	@Column(name = "password")
 	private String password;

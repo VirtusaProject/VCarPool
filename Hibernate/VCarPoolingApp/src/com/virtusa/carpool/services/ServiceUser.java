@@ -18,9 +18,9 @@ public class ServiceUser {
 	}
 
 	
-	public int update(User u, String feild, String value) throws VCarPoolException {
+	public int update(User u) throws VCarPoolException {
 		// TODO Auto-generated method stub
-		return dao.update(u, feild, value);
+		return dao.update(u);
 	}
 
 	
@@ -41,8 +41,8 @@ public class ServiceUser {
 		return dao.getUser(userId);
 	}
 	
-	public int getUserEmail(String email) throws VCarPoolException {
-		return dao.getUserEmail(email);
+	public User getUserByEmail(String email) throws VCarPoolException {
+		return dao.getUserByEmail(email);
 	}
 
 	

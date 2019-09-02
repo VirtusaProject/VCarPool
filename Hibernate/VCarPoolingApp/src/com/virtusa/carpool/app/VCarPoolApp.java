@@ -32,12 +32,24 @@ public class VCarPoolApp {
 	public static void main(String[] args) throws VCarPoolException {
 
 		User user = new User();
-		user.setUserName("user11");
-		user.setEmail("krshna@gail.com");
+		user.setUserName("user");
+		user.setEmail("krshna11@gail.com");
 		user.setPassword("password");
 		user.setType("provider");
+		/*
+		 * ServiceUser serviceUser = new ServiceUser(); if(serviceUser.login(1,
+		 * "passwor")>0) System.out.println("logged in sucessfully!"); else
+		 * System.out.println("error in login details");
+		 */
 		ServiceUser serviceUser = new ServiceUser();
-		System.out.println(serviceUser.insert(user));
+		User user1 = serviceUser.getUser(1);
+		User user2 = serviceUser.getUserByEmail("krshna11@gail.com");
+		System.out.println(serviceUser.showUsers());
+		System.out.println();
+
+		System.out.println(user1);
+		System.out.println();
+		System.out.println(user2);
 
 	}
 }
