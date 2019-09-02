@@ -20,7 +20,7 @@ if(obj!=null)
 %>
 </head>
 <body>
-<form method="post" action="/VCarPoolingApp/RegControllerServlet" >
+<form method="post" action="../RegControllerServlet" >
 		<div class="box">
 			<h1>Sign up - VCarPool</h1>
 			<h5 style="color:red;"><%=message %></h5>
